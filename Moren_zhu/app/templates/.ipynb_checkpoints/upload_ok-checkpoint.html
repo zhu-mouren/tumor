@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+body {
+  background-color: #e9e9e9;
+}
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>脑肿瘤检测结果 </title>
+    <link rel="icon" href="{{ url_for('static', filename='sztulogo.ico') }}">
+</head>
+<body>
+    <table width="960px" align="center" border="0" cellpadding="0" cellspacing="0">
+        <tr bgcolor="red" height="90" align="center">
+            <td><font color="white" size="6"><b>高级项目展示</b></font></td>
+        </tr>
+    </table>
+    <script type="text/javascript">
+        document.getElementById("sztu-logoname").align="top";
+    </script>
+    <div style="width:100%;text-align:center">
+        <form action="" enctype='multipart/form-data' method='POST'>
+            <div style="display:inline-block;background:#e9e9e9;">
+            <input type="file" name="file" class="filepath" onchange="changepic(this)" style="margin-top:20px;"/><br>
+            {{inputfilename}}
+                <p style="text-align: center;color:lightblue">
+                    <img src="{{ url_for('static', filename = inputfilename,_t=val1) }}" width="500" alt=""/></p>
+            </div>
+            <div style="display:inline-block;background:#e9e9e9;margin-left:10px;">
+                <input type="submit" value="上传检测" class="button-new" style="margin-top:15px;"/><br>
+            {{outfilename}}
+                <p style="text-align: center;color:lightblue">
+                    <img src="{{ url_for('static', filename = outfilename,_t=val1) }}" width="500" alt=""/></p>
+            </div>
+        </form>
+        </div>
+<!--    <img src="" id="show" width="200">-->
+    <script>
+    function changepic(obj) {
+        //console.log(obj.files[0]);//这里可以获取上传文件的name
+        var newsrc=getObjectURL(obj.files[0]);
+        document.getElementById('show').src=newsrc+".png";
+    }
+    //建立一個可存取到該file的url
+    function getObjectURL(file) {
+        var url = null ;
+        // 下面函数执行的效果是一样的，只是需要针对不同的浏览器执行不同的 js 函数而已
+        if (window.createObjectURL!=undefined) { // basic
+            url = window.createObjectURL(file) ;
+        } else if (window.URL!=undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file) ;
+        } else if (window.webkitURL!=undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file) ;
+        }
+        return url ;
+    }
+    </script>
+</body>
+</html>
